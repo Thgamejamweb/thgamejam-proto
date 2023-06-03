@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package thgamejam.api.user;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+service UserService {
+
+  rpc test(testRequest) returns (google.protobuf.Empty) {
+    option(google.api.http) = {
+      get: "/web/v1/test"
+    };
+  }
+}
+
+message testRequest {
+  string test1 = 1;
+}
+
+message testReply {
+  string test2 = 1;
+}
