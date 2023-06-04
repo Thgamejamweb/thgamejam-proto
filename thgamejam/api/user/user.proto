@@ -3,21 +3,20 @@ syntax = "proto3";
 package thgamejam.api.user;
 
 import "google/api/annotations.proto";
-import "google/protobuf/empty.proto";
 
 service UserService {
 
-  rpc test(testRequest) returns (google.protobuf.Empty) {
+  rpc test(TestRequest) returns (TestReply) {
     option(google.api.http) = {
       get: "/web/v1/test"
     };
   }
 }
 
-message testRequest {
+message TestRequest {
   string test1 = 1;
 }
 
-message testReply {
+message TestReply {
   string test2 = 1;
 }
