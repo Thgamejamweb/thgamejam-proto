@@ -7,9 +7,27 @@ import "google/protobuf/empty.proto";
 
 service User {
 
-  rpc test(google.protobuf.Empty) returns (TestReply) {
+  rpc testC(google.protobuf.Empty) returns (TestReply) {
     option(google.api.http) = {
-      get: "/web/v1/aaa"
+      get: "/web/v1/c"
+    };
+  }
+
+  rpc testR(google.protobuf.Empty) returns (TestReply) {
+    option(google.api.http) = {
+      get: "/web/v1/r"
+    };
+  }
+
+  rpc testU(google.protobuf.Empty) returns (TestReply) {
+    option(google.api.http) = {
+      get: "/web/v1/u"
+    };
+  }
+
+  rpc testD(google.protobuf.Empty) returns (TestReply) {
+    option(google.api.http) = {
+      get: "/web/v1/d"
     };
   }
 }
