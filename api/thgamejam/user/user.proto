@@ -31,6 +31,14 @@ service User {
     };
   }
 
+  // 修改密码
+  rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordReply) {
+    option(google.api.http) = {
+      post: "/web/v1/user/change/password"
+      body: "*"
+    };
+  }
+
 
 }
 
@@ -65,4 +73,13 @@ message RegisterUserRequest {
 message RegisterUserReply {
   int32 id = 1;
   string username = 2;
+}
+
+message ChangePasswordRequest {
+  string old_password = 1;
+  string new_password = 2;
+}
+
+message ChangePasswordReply {
+  int32 id = 1;
 }
