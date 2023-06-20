@@ -32,7 +32,7 @@ message GetUploadUrlRequest {
 
 message GetUploadReply {
   int32 id = 1;
-  string file_name = 2;
+  string url = 2;
 }
 
 message GetDownloadUrlRequest {
