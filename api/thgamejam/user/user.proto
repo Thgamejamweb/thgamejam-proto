@@ -3,7 +3,7 @@ syntax = "proto3";
 package api.thgamejam.user;
 
 import "google/api/annotations.proto";
-//import "google/protobuf/empty.proto";
+import "google/protobuf/empty.proto";
 
 // 用户服务
 service User {
@@ -39,6 +39,12 @@ service User {
     };
   }
 
+  // 获取用户userid
+  rpc GetUserTokenInfo(google.protobuf.Empty) returns (GetUserTokenInfoReply) {
+    option(google.api.http) = {
+      get: "web/v1/user/id"
+    };
+  }
 
 }
 
@@ -81,5 +87,9 @@ message ChangePasswordRequest {
 }
 
 message ChangePasswordReply {
+  int32 id = 1;
+}
+
+message GetUserTokenInfoReply {
   int32 id = 1;
 }
