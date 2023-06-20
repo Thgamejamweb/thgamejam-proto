@@ -23,7 +23,7 @@ service User {
     };
   }
 
-  // 登录验证
+  // 注册用户
   rpc RegisterUser(RegisterUserRequest) returns (RegisterUserReply) {
     option(google.api.http) = {
       post: "/web/v1/user/register"
@@ -35,6 +35,14 @@ service User {
   rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordReply) {
     option(google.api.http) = {
       post: "/web/v1/user/change/password"
+      body: "*"
+    };
+  }
+
+  // 修改用户描述
+  rpc ChangeDescription(ChangeDescriptionRequest) returns (google.protobuf.Empty) {
+    option(google.api.http) = {
+      post: "/web/v1/user/change/description"
       body: "*"
     };
   }
@@ -92,4 +100,8 @@ message ChangePasswordReply {
 
 message GetUserTokenInfoReply {
   int32 id = 1;
+}
+
+message ChangeDescriptionRequest {
+  string description = 1;
 }
