@@ -7,8 +7,6 @@ import "google/protobuf/empty.proto";
 
 service Team {
 
-
-
   // 获取队伍成员列表
   rpc GetTeamNumberList(GetTeamNumberListRequest) returns (GetTeamNumberListReply) {
     option(google.api.http) = {

@@ -48,9 +48,15 @@ service User {
   }
 
   // 获取用户userid
-  rpc GetUserTokenInfo(google.protobuf.Empty) returns (GetUserTokenInfoReply) {
+  rpc GetUserTokenInfo(google.protobuf.Empty) returns (GetUserIdInfoReply) {
     option(google.api.http) = {
       get: "web/v1/user/id"
+    };
+  }
+
+  rpc GetUserIdByName(GetUserIdByNameRequest) returns (GetUserIdInfoReply) {
+    option(google.api.http) = {
+      get: "web/v1/user/name/{name}"
     };
   }
 
@@ -98,10 +104,14 @@ message ChangePasswordReply {
   int32 id = 1;
 }
 
-message GetUserTokenInfoReply {
+message GetUserIdInfoReply {
   int32 id = 1;
 }
 
 message ChangeDescriptionRequest {
   string description = 1;
+}
+
+message GetUserIdByNameRequest {
+  string name = 1;
 }
