@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package api.thgamejam.competition;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+service Competition {
+
+  // 获取开始比赛列表
+  rpc GetStartCompetitionList(google.protobuf.Empty) returns (CompetitionListReply) {
+    option(google.api.http) = {
+      get: "web/v1/competition"
+    };
+  }
+
+  // 获取用户参加比赛列表
+  rpc GetUserJoinCompetitionList(GetUserJoinCompetitionListRequest) returns (CompetitionListReply) {
+    option(google.api.http) = {
+      get: "web/v1/competition/user/{user_id}"
+    };
+  }
+
+  // 获取团队参加比赛列表
+  rpc GetTeamJoinCompetitionList(GetTeamJoinCompetitionListRequest) returns (CompetitionListReply) {
+    option(google.api.http) = {
+      get: "web/v1/competition/user/{team_id}"
+    };
+  }
+
+
+}
+
+message CompetitionListReply {
+  repeated CompetitionInfo list = 1;
+}
+
+message CompetitionInfo {
+  int32 id = 1;
+  string name = 2;
+  int32 staff_id = 3;
+  string description = 4;
+  string header_imageURL = 5;
+}
+
+message GetUserJoinCompetitionListRequest {
+  int32 user_id = 1;
+}
+
+message GetTeamJoinCompetitionListRequest {
+  int32 team_id = 1;
+}

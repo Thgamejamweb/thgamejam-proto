@@ -44,6 +44,13 @@ service Team {
       body: "*"
     };
   }
+
+  // 删除队伍
+  rpc DeleteTeam(DeleteTeamRequest) returns (google.protobuf.Empty) {
+    option(google.api.http) = {
+      delete: "/web/v1/team/{team_id}"
+    };
+  }
 }
 
 message CreateTeamRequest {
@@ -73,4 +80,9 @@ message UserInfo {
   string name = 2;
   string avatar_url = 3;
 }
+
+message DeleteTeamRequest {
+  int32 team_id = 1;
+}
+
 
