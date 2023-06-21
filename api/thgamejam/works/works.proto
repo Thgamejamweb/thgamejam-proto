@@ -7,7 +7,7 @@ import "google/protobuf/empty.proto";
 
 service Works {
 
-  // 创建队伍
+  // 创建作品
   rpc CreateWorks(CreateWorksRequest) returns (CreateWorksReply) {
     option(google.api.http) = {
       put: "/web/v1/works"
@@ -15,23 +15,27 @@ service Works {
     };
   }
 
-   // 修改团队
-  rpc UpdateWorks(UpdateWorksRequest) returns (UpdateWorksReply) {
+  // 修改作品
+  rpc UpdateWorks(UpdateWorksRequest) returns (google.protobuf.Empty) {
     option(google.api.http) = {
-      put: "/web/v1/works"
+      post: "/web/v1/works"
       body: "*"
     };
   }
 }
-message UpdateWorksReply{
-
+// 删除作品
+message DeleteWorksRequest{
+  int32 work_id = 1;
 }
+
 message UpdateWorksRequest{
-
+  string name = 1;
+  int32 work_id = 2;
 }
+
 message CreateWorksRequest{
   string name = 1;
-  int32 team_id = 2;
+  int32 work_id = 2;
   string header_imageURL = 3;
 }
 
