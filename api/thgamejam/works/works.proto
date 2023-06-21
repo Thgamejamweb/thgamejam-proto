@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package api.thgamejam.works;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+service Works {
+
+  // 创建队伍
+  rpc CreateWorks(CreateWorksRequest) returns (CreateWorksReply) {
+    option(google.api.http) = {
+      put: "/web/v1/works"
+      body: "*"
+    };
+  }
+
+   // 修改团队
+  rpc UpdateWorks(UpdateWorksRequest) returns (UpdateWorksReply) {
+    option(google.api.http) = {
+      put: "/web/v1/works"
+      body: "*"
+    };
+  }
+}
+message UpdateWorksReply{
+
+}
+message UpdateWorksRequest{
+
+}
+message CreateWorksRequest{
+  string name = 1;
+  int32 team_id = 2;
+  string header_imageURL = 3;
+}
+
+message CreateWorksReply{
+  int32 id = 1;
+}
+message WorkInfo {
+  int32 id = 1;
+  string name = 2;
+  string avatar_url = 3;
+}

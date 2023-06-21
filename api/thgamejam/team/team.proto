@@ -33,8 +33,7 @@ service Team {
   // 删除队伍成员
   rpc DeleteTeamNumber(SetTeamNumberRequest) returns (google.protobuf.Empty) {
     option(google.api.http) = {
-      delete: "/web/v1/team/number"
-      body: "*"
+      delete: "/web/v1/team/{team_id}/user/{user_id}"
     };
   }
 
