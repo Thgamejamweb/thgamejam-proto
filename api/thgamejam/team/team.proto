@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package api.thgamejam.team;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+service Team {
+
+
+
+  // 获取队伍成员列表
+  rpc GetTeamNumberList(GetTeamNumberListRequest) returns (GetTeamNumberListReply) {
+    option(google.api.http) = {
+      get: "/web/v1/team/{team_id}"
+    };
+  }
+
+  // 同意加入队伍
+  rpc JoinTeam(SetTeamNumberRequest) returns (google.protobuf.Empty) {
+    option(google.api.http) = {
+      put: "/web/v1/team/number/join"
+      body: "*"
+    };
+  }
+
+  // 添加队伍成员
+  rpc AddTeamNumber(SetTeamNumberRequest) returns (google.protobuf.Empty) {
+    option(google.api.http) = {
+      put: "/web/v1/team/number"
+      body: "*"
+    };
+  }
+
+  // 删除队伍成员
+  rpc DeleteTeamNumber(SetTeamNumberRequest) returns (google.protobuf.Empty) {
+    option(google.api.http) = {
+      delete: "/web/v1/team/number"
+      body: "*"
+    };
+  }
+
+  // 创建队伍
+  rpc CreateTeam(CreateTeamRequest) returns (CreateTeamReply) {
+    option(google.api.http) = {
+      put: "/web/v1/team"
+      body: "*"
+    };
+  }
+}
+
+message CreateTeamRequest {
+  string name = 1;
+  repeated int32 number_id_list = 2;
+}
+
+message CreateTeamReply {
+  int32 team_id = 1;
+}
+
+message SetTeamNumberRequest {
+  int32 team_id = 1;
+  int32 user_id = 2;
+}
+
+message GetTeamNumberListRequest {
+  int32 team_id = 1;
+}
+
+message GetTeamNumberListReply {
+  repeated UserInfo list = 1;
+}
+
+message UserInfo {
+  int32 id = 1;
+  string name = 2;
+  string avatar_url = 3;
+}
+
