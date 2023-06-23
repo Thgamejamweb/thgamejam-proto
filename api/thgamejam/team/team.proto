@@ -10,7 +10,7 @@ service Team {
   // 获取队伍成员列表
   rpc GetTeamNumberList(GetTeamNumberListRequest) returns (GetTeamNumberListReply) {
     option(google.api.http) = {
-      get: "/web/v1/team/{team_id}"
+      get: "/web/v1/teamList/{team_id}"
     };
   }
 
@@ -18,6 +18,13 @@ service Team {
   rpc JoinTeam(SetTeamNumberRequest) returns (google.protobuf.Empty) {
     option(google.api.http) = {
       put: "/web/v1/team/number/join"
+      body: "*"
+    };
+  }
+
+  rpc ChangeTeamName(ChangeTeamNameRequest) returns (google.protobuf.Empty) {
+    option(google.api.http) = {
+      post: "/web/v1/team/name"
       body: "*"
     };
   }
@@ -55,7 +62,6 @@ service Team {
 
 message CreateTeamRequest {
   string name = 1;
-  repeated int32 number_id_list = 2;
 }
 
 message CreateTeamReply {
@@ -83,6 +89,10 @@ message UserInfo {
 
 message DeleteTeamRequest {
   int32 team_id = 1;
+}
+
+message ChangeTeamNameRequest {
+  string new_name = 1;
 }
 
 
