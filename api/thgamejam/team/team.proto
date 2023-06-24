@@ -22,6 +22,7 @@ service Team {
     };
   }
 
+  // 修改队伍名称
   rpc ChangeTeamName(ChangeTeamNameRequest) returns (google.protobuf.Empty) {
     option(google.api.http) = {
       post: "/web/v1/team/name"
@@ -92,7 +93,8 @@ message DeleteTeamRequest {
 }
 
 message ChangeTeamNameRequest {
-  string new_name = 1;
+  int32 team_id = 1;
+  string new_name = 2;
 }
 
 
