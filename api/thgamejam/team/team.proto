@@ -14,6 +14,21 @@ service Team {
     };
   }
 
+  // 获取用户加入的所有团队
+  rpc GetUserJoinAllTeamList(GetUserJoinAllTeamListRequest) returns (GetUserAllTeamListReply) {
+    option(google.api.http) = {
+      post: "/web/v1/team/user/join/list"
+      body: "*"
+    };
+  }
+
+  // 获取用户被邀请进入的团队
+  rpc GetAllRequestTeamList(google.protobuf.Empty) returns (GetUserAllTeamListReply) {
+    option(google.api.http) = {
+      get: "/web/v1/team/user/request"
+    };
+  }
+
   // 同意加入队伍
   rpc JoinTeam(SetTeamMemberRequest) returns (google.protobuf.Empty) {
     option(google.api.http) = {
@@ -59,6 +74,14 @@ service Team {
       delete: "/web/v1/team/user/{team_id}"
     };
   }
+
+  // 拒绝加入团队请求
+  rpc RejectJoinTeam(RejectJoinTeamRequest) returns (google.protobuf.Empty) {
+    option(google.api.http) = {
+      post: "/web/v1/team/user/reject"
+      body: "*"
+    };
+  }
 }
 
 message CreateTeamRequest {
@@ -95,6 +118,23 @@ message DeleteTeamRequest {
 message ChangeTeamNameRequest {
   int32 team_id = 1;
   string new_name = 2;
+}
+
+message RejectJoinTeamRequest {
+  int32 team_id = 1;
+}
+
+message GetUserJoinAllTeamListRequest {
+  int32 user_id = 1;
+}
+
+message GetUserAllTeamListReply {
+  repeated TeamInfo list = 1;
+}
+
+message TeamInfo {
+  int32 team_id = 1;
+  string team_name = 2;
 }
 
 
