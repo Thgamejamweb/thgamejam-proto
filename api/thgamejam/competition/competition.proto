@@ -7,27 +7,71 @@ import "google/protobuf/empty.proto";
 
 service Competition {
 
+  // 获取开始报名比赛列表
+  rpc GetSignupCompetitionList(google.protobuf.Empty) returns (CompetitionListReply) {
+    option(google.api.http) = {
+      get: "/web/v1/competition/signup"
+    };
+  }
+
   // 获取开始比赛列表
   rpc GetStartCompetitionList(google.protobuf.Empty) returns (CompetitionListReply) {
     option(google.api.http) = {
-      get: "web/v1/competition"
+      get: "/web/v1/competition/start"
+    };
+  }
+
+  // 获取结束比赛列表
+  rpc GetEndCompetitionList(google.protobuf.Empty) returns (CompetitionListReply) {
+    option(google.api.http) = {
+      get: "/web/v1/competition/end"
     };
   }
 
   // 获取用户参加比赛列表
   rpc GetUserJoinCompetitionList(GetUserJoinCompetitionListRequest) returns (CompetitionListReply) {
     option(google.api.http) = {
-      get: "web/v1/competition/user/{user_id}"
+      get: "/web/v1/competition/{user_id}"
     };
   }
 
   // 获取团队参加比赛列表
   rpc GetTeamJoinCompetitionList(GetTeamJoinCompetitionListRequest) returns (CompetitionListReply) {
     option(google.api.http) = {
-      get: "web/v1/competition/user/{team_id}"
+      get: "/web/v1/competition/team/{team_id}"
     };
   }
 
+  // 获取用户是否有创建比赛权限
+  rpc GetUserIsStaff(google.protobuf.Empty) returns (google.protobuf.Empty) {
+    option(google.api.http) = {
+      get: "/web/v1/competition/user/staff"
+    };
+  }
+
+  // 创建比赛
+  rpc CreateCompetition(CreateCompetitionRequest) returns (CreateCompetitionReply) {
+    option(google.api.http) = {
+      post: "/web/v1/competition/user"
+      body: "*"
+    };
+  }
+
+  // 创建比赛
+  rpc JoinCompetition(JoinCompetitionRequest) returns (google.protobuf.Empty) {
+    option(google.api.http) = {
+      post: "/web/v1/competition/user/join"
+      body: "*"
+    };
+  }
+
+  // 添加比赛作品
+  rpc AddCompetitionWorks(AddWorksRequest) returns (google.protobuf.Empty) {
+    option(google.api.http) = {
+      post: "/web/v1/competition/user/add/works"
+      body: "*"
+    };
+  }
 
 }
 
@@ -49,4 +93,32 @@ message GetUserJoinCompetitionListRequest {
 
 message GetTeamJoinCompetitionListRequest {
   int32 team_id = 1;
+}
+
+message CreateCompetitionRequest {
+  string name = 1;
+  string description = 2;
+  string header_imageURL = 3;
+  string signup_start_date = 4;
+  string signup_end_date = 5;
+  string start_date = 6;
+  string end_date = 7;
+  string score_start_date = 8;
+  string score_end_date = 9;
+  string content = 10;
+}
+
+message CreateCompetitionReply {
+  int32 competition_id = 1;
+}
+
+message JoinCompetitionRequest {
+  int32 team_id = 1;
+  int32 competition_id = 2;
+}
+
+message AddWorksRequest {
+  int32 works_id = 1;
+  int32 team_id = 2;
+  int32 competition_id = 3;
 }
