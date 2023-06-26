@@ -10,7 +10,7 @@ service Works {
   // 创建作品
   rpc CreateWorks(CreateWorksRequest) returns (CreateWorksReply) {
     option(google.api.http) = {
-      put: "/web/v1/works"
+      put: "/web/v1/works/user"
       body: "*"
     };
   }
@@ -18,15 +18,15 @@ service Works {
   // 修改作品
   rpc UpdateWorks(UpdateWorksRequest) returns (google.protobuf.Empty) {
     option(google.api.http) = {
-      post: "/web/v1/works"
+      post: "/web/v1/works/user"
       body: "*"
     };
   }
 
   // 删除作品
-  rpc DeleteWorksById(WorksIdRequest) returns (google.protobuf.Empty) {
+  rpc DeleteWorksById(DeleteWorksByIdRequest) returns (google.protobuf.Empty) {
     option(google.api.http) = {
-      delete: "/web/v1/works/{work_id}"
+      delete: "/web/v1/works/user/{work_id}"
     };
   }
 
@@ -40,29 +40,21 @@ service Works {
   // 通过作品名获取作品
   rpc GetWorksByName(GetWorksByNameRequest) returns (WorksInfo){
     option(google.api.http) = {
-      get: "/web/v1/works/{name}"
+      get: "/web/v1/works/work_name/{name}"
     };
   }
 
   // 通过团队名获取作品列表
   rpc GetWorksListByTermName(GetWorksByNameRequest) returns (GetWorksListByTeamNameReply){
     option(google.api.http) = {
-      get: "/web/v1/works/{name}"
+      get: "/web/v1/works/team_name/{name}"
     };
   }
 
   //  获取作品详情
   rpc GetWorksDetailsById(WorksIdRequest) returns (WorkDetails){
     option(google.api.http) = {
-      get: "/web/v1/works/{work_id}"
-    };
-  }
-
-  //  更新作品详情
-  rpc UpdateWorksDetailsById(UpdateWorksDetailsRequest) returns (google.protobuf.Empty){
-    option(google.api.http) = {
-      post: "/web/v1/works"
-      body: "*"
+      get: "/web/v1/works/detail/{work_id}"
     };
   }
 }
@@ -72,6 +64,9 @@ message CreateWorksRequest{
   string name = 1;
   int32 team_id = 2;
   string header_imageURL = 3;
+  string content = 4;
+  int32 file_id = 5;
+  string image_url_list = 6;
 }
 
 // 删除作品请求
@@ -85,9 +80,13 @@ message UpdateWorksRequest{
   int32 team_id = 2;
   string header_imageURL = 3;
   string name = 4;
+  string image_url_list = 5;
+  string content = 6;
+  string team_name = 7;
+  int32 file_id = 8;
 }
 
-//创建作品请求
+// 创建作品请求
 message CreateWorksReply{
   int32 id = 1;
 }
@@ -97,20 +96,13 @@ message GetWorksByNameRequest{
   string name = 1;
 }
 
-//获取作品列表响应
+// 获取作品列表响应
 message GetWorksListByTeamNameReply{
   repeated WorksInfo workList = 1;
 }
-
-message UpdateWorksDetailsRequest{
+message DeleteWorksByIdRequest{
   int32 work_id = 1;
-  //  轮播图
-  string image_url_list = 2;
-  //   比赛介绍富文本
-  string content = 3;
-  string work_name = 4;
-  string team_name = 5;
-  string header_imageURL = 6;
+  int32 team_id = 2;
 }
 
 message WorksInfo {
@@ -124,9 +116,9 @@ message WorksInfo {
 message WorkDetails{
   int32 work_id = 1;
   string team_id = 2;
-  //  轮播图
+  // 轮播图
   string image_url_list = 3;
-  //   比赛介绍富文本
+  // 比赛介绍富文本
   string content = 4;
   string work_name = 5;
   string team_name = 6;
