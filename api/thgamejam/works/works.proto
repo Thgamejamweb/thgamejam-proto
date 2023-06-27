@@ -70,7 +70,7 @@ message CreateWorksRequest{
   string header_imageURL = 3;
   string content = 4;
   int32 file_id = 5;
-  string image_url_list = 6;
+ repeated string image_url_list = 6;
 }
 message GetWorksByIdRequest{
   int32 team_id = 1;
@@ -86,7 +86,7 @@ message UpdateWorksRequest{
   int32 team_id = 2;
   string header_imageURL = 3;
   string name = 4;
-  string image_url_list = 5;
+ repeated string image_url_list = 5;
   string content = 6;
   string team_name = 7;
   int32 file_id = 8;
@@ -125,7 +125,7 @@ message WorkDetails{
   int32 works_id = 1;
   int32 team_id = 2;
   // 轮播图
-  string image_url_list = 3;
+  repeated string image_url_list = 3;
   // 比赛介绍富文本
   string content = 4;
   string works_name = 5;
