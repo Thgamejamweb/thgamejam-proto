@@ -82,7 +82,7 @@ message CompetitionListReply {
 message CompetitionInfo {
   int32 id = 1;
   string name = 2;
-  int32 staff_id = 3;
+  string staff_name = 3;
   string description = 4;
   string header_imageURL = 5;
 }
