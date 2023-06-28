@@ -22,7 +22,7 @@ service Competition {
   }
 
   // 获取比赛所有的已提交参赛作品信息
-  rpc GetWorksListByCompetitionId(GetWorksListByCompetitionIdRequest) returns (WorksInfoReply) {
+  rpc GetWorksListByCompetitionId(GetWorksListByCompetitionIdRequest) returns (WorksListReply) {
     option(google.api.http) = {
       get: "/web/v1/competition/{competition_id}/list"
     };
@@ -142,6 +142,5 @@ message WorksInfoReply {
   int32 works_id = 1;
   string works_name = 2;
   string team_name = 3;
-  string description = 4;
-  string header_imageURL = 5;
+  string header_imageURL = 4;
 }
