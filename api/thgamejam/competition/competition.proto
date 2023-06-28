@@ -21,6 +21,13 @@ service Competition {
     };
   }
 
+  // 获取比赛所有的已提交参赛作品信息
+  rpc GetWorksListByCompetitionId(GetWorksListByCompetitionIdRequest) returns (WorksInfoReply) {
+    option(google.api.http) = {
+      get: "/web/v1/competition/{competition_id}/list"
+    };
+  }
+
   // 获取结束比赛列表
   rpc GetEndCompetitionList(google.protobuf.Empty) returns (CompetitionListReply) {
     option(google.api.http) = {
@@ -121,4 +128,20 @@ message AddWorksRequest {
   int32 works_id = 1;
   int32 team_id = 2;
   int32 competition_id = 3;
+}
+
+message GetWorksListByCompetitionIdRequest {
+  int32 competition_id = 1;
+}
+
+message WorksListReply {
+  repeated WorksInfoReply list = 1;
+}
+
+message WorksInfoReply {
+  int32 works_id = 1;
+  string works_name = 2;
+  string team_name = 3;
+  string description = 4;
+  string header_imageURL = 5;
 }
