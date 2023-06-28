@@ -40,7 +40,7 @@ service Works {
   // 通过作品名获取作品
   rpc GetWorksByName(GetWorksByNameRequest) returns (WorksInfo){
     option(google.api.http) = {
-      get: "/web/v1/works/work_name/{name}"
+      get: "/web/v1/works/works_name/{name}"
     };
   }
 
@@ -61,6 +61,18 @@ service Works {
       get: "/web/v1/works/detail/{works_id}"
     };
   }
+  //  随机获取四条数据
+  rpc GetRandom4DateRequest(google.protobuf.Empty) returns (GetRandom4DateReply){
+    option(google.api.http) = {
+      get: "/web/v1/works/random/list"
+    };
+  }
+  //  id倒序获取最后八个作品
+  rpc getWorksByReverseIdRequest(google.protobuf.Empty) returns (getWorksByReverseIdReply){
+    option(google.api.http) = {
+      get: "/web/v1/works/reverse/list"
+    };
+  }
 }
 
 //创建作品请求
@@ -70,7 +82,7 @@ message CreateWorksRequest{
   string header_imageURL = 3;
   string content = 4;
   int32 file_id = 5;
- repeated string image_url_list = 6;
+  repeated string image_url_list = 6;
 }
 message GetWorksByIdRequest{
   int32 team_id = 1;
@@ -86,7 +98,7 @@ message UpdateWorksRequest{
   int32 team_id = 2;
   string header_imageURL = 3;
   string name = 4;
- repeated string image_url_list = 5;
+  repeated string image_url_list = 5;
   string content = 6;
   string team_name = 7;
   int32 file_id = 8;
@@ -112,7 +124,12 @@ message DeleteWorksByIdRequest{
   int32 work_id = 1;
   int32 team_id = 2;
 }
-
+message GetRandom4DateReply{
+  repeated WorksInfo works_list = 1;
+}
+message getWorksByReverseIdReply{
+  repeated WorksInfo works_list = 1;
+}
 message WorksInfo {
   int32 id = 1;
   int32 team_id = 2;
