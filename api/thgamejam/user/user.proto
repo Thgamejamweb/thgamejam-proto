@@ -61,6 +61,12 @@ service User {
     };
   }
 
+  rpc GetUserInfoById(GetUserInfoByIdRequest) returns (UserInfoReply) {
+    option(google.api.http) = {
+      get: "/web/v1/user/info/{user_id}"
+    };
+  }
+
 }
 
 message GetUserPublicKeyRequest {
@@ -115,4 +121,16 @@ message ChangeDescriptionRequest {
 
 message GetUserIdByNameRequest {
   string name = 1;
+}
+
+message GetUserInfoByIdRequest {
+  int32 user_id = 1;
+}
+
+message UserInfoReply {
+  int32 id = 1;
+  string name = 2;
+  string description = 3;
+  string avatar_image = 4;
+  bool is_staff = 5;
 }
