@@ -16,12 +16,23 @@ service File {
     };
   }
 
-  rpc GetDownloadUrl(GetDownloadUrlRequest) returns (GetDownloadUrlReply) {
+  rpc GetDownloadUrlByid(GetDownloadUrlRequest) returns (GetDownloadUrlReply) {
     option(google.api.http) = {
-      get: "/web/v1/file/download/{id}"
+      get: "/web/v1/file/download/id/{id}"
     };
   }
 
+  rpc GetDownloadUrlByFileName(GetDownloadUrlByStrRequest) returns (GetDownloadUrlReply) {
+    option(google.api.http) = {
+      get: "/web/v1/file/download/name/{info}"
+    };
+  }
+
+  rpc GetDownloadUrlByTag(GetDownloadUrlByStrRequest) returns (GetDownloadUrlReply) {
+    option(google.api.http) = {
+      get: "/web/v1/file/download/tag/{info}"
+    };
+  }
 }
 
 message GetUploadUrlRequest {
@@ -41,4 +52,8 @@ message GetDownloadUrlRequest {
 
 message GetDownloadUrlReply {
   string url = 1;
+}
+
+message GetDownloadUrlByStrRequest {
+  string info = 1;
 }
