@@ -67,6 +67,12 @@ service User {
     };
   }
 
+  rpc ChangeUserInfo(UserInfoReply) returns (google.protobuf.Empty) {
+    option(google.api.http) = {
+      post: "/web/v1/user/info/change"
+      body: "*"
+    };
+  }
 }
 
 message GetUserPublicKeyRequest {
