@@ -80,8 +80,22 @@ service Works {
       body:"*"
     };
   }
+  rpc GetWorksListByTeamIdList(GetWorksByTeamIdListRequest) returns (GetWorksListByTeamIdListReply){
+    option(google.api.http) = {
+      post: "/web/v1/works/team_id_list/"
+      body:"*"
+    };
+  }
+}
+message GetWorksByTeamIdListRequest{
+  repeated int32 team_id_list = 1;
 }
 
+
+
+message GetWorksListByTeamIdListReply{
+  repeated WorksInfo works_list = 1;
+}
 //创建作品请求
 message CreateWorksRequest{
   string name = 1;
