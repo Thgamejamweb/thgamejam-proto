@@ -45,12 +45,12 @@ service Works {
   }
 
   // 通过团队名获取作品列表
-  rpc GetWorksListByTermName(GetWorksByNameRequest) returns (GetWorksListByTeamNameReply){
+  rpc GetWorksListByTeamName(GetWorksByNameRequest) returns (GetWorksListByTeamNameReply){
     option(google.api.http) = {
       get: "/web/v1/works/team_name/{name}"
     };
   }
-  rpc GetWorksListByTermId(GetWorksByIdRequest) returns (GetWorksListByTeamIdReply){
+  rpc GetWorksListByTeamId(GetWorksByIdRequest) returns (GetWorksListByTeamIdReply){
     option(google.api.http) = {
       get: "/web/v1/works/team_id/{team_id}"
     };
@@ -68,9 +68,16 @@ service Works {
     };
   }
   //  id倒序获取最后八个作品
-  rpc getWorksByReverseIdRequest(google.protobuf.Empty) returns (getWorksByReverseIdReply){
+  rpc GetWorksByReverseIdRequest(google.protobuf.Empty) returns (getWorksByReverseIdReply){
     option(google.api.http) = {
       get: "/web/v1/works/reverse/list"
+    };
+  }
+
+  rpc GetUserIsTeamAdmin(GetUserIsTeamAdminRequest) returns (google.protobuf.Empty) {
+    option(google.api.http) = {
+      post:"/web/v1/works/admin"
+      body:"*"
     };
   }
 }
@@ -149,5 +156,9 @@ message WorkDetails{
   string team_name = 6;
   string header_imageURL = 7;
   int32 file_id = 8;
+}
+
+message GetUserIsTeamAdminRequest{
+  int32 team_id = 1;
 }
 
