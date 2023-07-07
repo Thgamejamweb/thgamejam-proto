@@ -6,7 +6,12 @@ import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 
 service Works {
-
+  //  获取用户的所有作品
+  rpc GetAllWorksByUserRequest(google.protobuf.Empty) returns (GetAllWorksByUserReply){
+    option(google.api.http) = {
+      get: "/web/v1/works/user/list"
+    };
+  }
   // 创建作品
   rpc CreateWorks(CreateWorksRequest) returns (CreateWorksReply) {
     option(google.api.http) = {
@@ -129,7 +134,9 @@ message UpdateWorksRequest{
 message CreateWorksReply{
   int32 id = 1;
 }
-
+message GetAllWorksByUserReply{
+  repeated WorksInfo work_list = 1;
+}
 // 通过团队名/作品名获取作品列表
 message GetWorksByNameRequest{
   string name = 1;
