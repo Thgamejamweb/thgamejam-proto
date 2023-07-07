@@ -54,6 +54,13 @@ service User {
     };
   }
 
+  // 获取用户userid
+  rpc GetUserTokenInfoWithoutError(google.protobuf.Empty) returns (GetUserIdInfoReply) {
+    option(google.api.http) = {
+      get: "/web/v1/token/info"
+    };
+  }
+
   // 通过用户id获取名字
   rpc GetUserIdByName(GetUserIdByNameRequest) returns (GetUserIdInfoReply) {
     option(google.api.http) = {
