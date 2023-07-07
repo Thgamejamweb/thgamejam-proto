@@ -65,9 +65,9 @@
     title: 删除作品
     participant 前端
     participant 后端
-    前端-->>后端: GetWorksListByTeamId获取队伍成员列表
-    note over 后端: 通过team_id获取所有work
-    后端->> 前端: 返回GetWorksList
+    前端-->>后端: DeleteWorksByIdRequest删除作品
+    note over 后端: 校验当前用户是否为队长。
+    后端->> 前端: 成功无返回，失败返回状态码
 ```
 
 ## 更新作品
@@ -77,9 +77,10 @@
     title: 更新作品
     participant 前端
     participant 后端
-    前端-->>后端: GetWorksListByTeamId获取队伍成员列表
-    note over 后端: 通过team_id获取所有work
-    后端->> 前端: 返回GetWorksList
+    前端-->>后端: UpdateWorksRequest更新
+    note over 后端: 校验当前用户是否为队长。
+后端->> 前端: 成功无返回，失败返回状态码
+  
 ```
 
 ## 创建作品
@@ -89,7 +90,7 @@
     title: 创建作品
     participant 前端
     participant 后端
-    前端-->>后端: GetWorksListByTeamId获取队伍成员列表
-    note over 后端: 通过team_id获取所有work
-    后端->> 前端: 返回GetWorksList
+    前端-->>后端: createWorkdeRequest创建作品
+    note over 后端: 校验当前用户是否为队长。
+    后端->> 前端: 成功返回作品id，失败返回状态码
 ```
