@@ -23,7 +23,7 @@ service Works {
   // 修改作品
   rpc UpdateWorks(UpdateWorksRequest) returns (google.protobuf.Empty) {
     option(google.api.http) = {
-      post: "/web/v1/works/user"
+      post: "/web/v1/works/user/update"
       body: "*"
     };
   }
