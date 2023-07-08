@@ -14,6 +14,14 @@ service Competition {
     };
   }
 
+  // 获取比赛详细信息
+  rpc GetCompetitionDetailInfo(GetCompetitionDetailInfoRequest) returns (CompetitionDetailReply) {
+    option(google.api.http) = {
+      post: "/web/v1/competition/detail/info"
+      body: "*"
+    };
+  }
+
   // 获取开始比赛列表
   rpc GetStartCompetitionList(google.protobuf.Empty) returns (CompetitionListReply) {
     option(google.api.http) = {
@@ -143,4 +151,18 @@ message WorksInfoReply {
   string works_name = 2;
   string team_name = 3;
   string header_imageURL = 4;
+}
+
+message GetCompetitionDetailInfoRequest {
+  int32 competition_id = 1;
+}
+
+message CompetitionDetailReply {
+  string name = 1;
+  string context = 2;
+  bool is_signup = 3;
+  string staff_name = 4;
+  string description = 5;
+  string header_imageURL = 6;
+  repeated WorksInfoReply works_list = 7;
 }
