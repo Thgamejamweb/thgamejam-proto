@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package api.thgamejam.chatgpt;
+
+import "google/api/annotations.proto";
+
+service Aigc {
+
+  // aigc
+  rpc UpdateContent(UpdateContentRequest) returns (UpdateContentReply) {
+    option(google.api.http) = {
+      post: "/web/v1/aigc/user/update/content"
+      body: "*"
+    };
+  }
+}
+
+message UpdateContentRequest {
+  string content = 1;
+}
+
+message UpdateContentReply {
+  string new_content = 1;
+}
